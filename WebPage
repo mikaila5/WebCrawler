@@ -1,0 +1,38 @@
+package webcrawler;
+
+import java.io.IOException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+
+import org.jsoup.Jsoup;
+import org.jsoup.nodes.Document;
+import org.jsoup.nodes.Element;
+import org.jsoup.select.Elements;
+
+public class WebPage {
+	private Anchor anchor;
+	private String webPageHash;
+	private int anchorParseStatus;
+	private int emailParseStatus;
+	
+	private Document document;
+	/**
+	 * General constructor for crawling
+	 */
+	public WebPage(Anchor anchor) {
+		this.anchor = anchor;
+	}
+	
+	/**
+	 * Jsoup gets html
+	 */
+	private void loadDocumentFromWeb() {
+		try {
+			document = Jsoup.connect(anchor.anchor.getAnchorUrl()).get();
+		} 
+		catch (IOException e) {
+			Logger.getLogger(WebCrawler.class.getName()).log(Level.SEVERE, null, e);
+		}
+	}
+
+}
