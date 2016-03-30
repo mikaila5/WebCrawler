@@ -1,27 +1,26 @@
-package otherPart;
+package webcrawler;
 
 import java.sql.Timestamp;
 
 public class Anchor {
 
-	public Anchor() {
-		final Domain domain;
-		final String anchorMash;
-		final String anchorUrl;
-		final int scanStatus;
-		final boolean activated;
-		final Timestamp modified;
-		final Timestamp created;
+	private Domain domain;
+	private String anchorHash;
+	private String anchorUrl;
+	private int scanStatus;
+	private boolean activated;
+	private Timestamp modified;
+	private Timestamp created;
 
-	Domain getDomain() {
+	public Domain getDomain() {
 		return domain;
 	}
 
-	String getAnchorMash() {
-		return anchorMash;
+	public String getAnchoMash() {
+		return anchorHash;
 	}
 
-	String getAnchorUrl() {
+	public String getAnchorUrl() {
 		return anchorUrl;
 	}
 
@@ -29,7 +28,7 @@ public class Anchor {
 		return scanStatus;
 	}
 
-	public boolean isActivated() {
+	public Timestamp isActivated() {
 		return modified;
 	}
 
@@ -48,10 +47,11 @@ public class Anchor {
 		this.domain = domain;
 		this.anchorHash = anchorHash;
 		this.anchorUrl = anchorUrl;
-		this.scanStaus = scanStatus;
+		this.scanStatus = scanStatus;
 		this.activated = activated;
 		this.modified = modified;
 		this.created = created;
 
 	}
+
 }
