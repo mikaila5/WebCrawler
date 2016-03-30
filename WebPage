@@ -1,4 +1,4 @@
-package webcrawler;
+package Webcrawler;
 
 import java.io.IOException;
 import java.util.logging.Level;
@@ -25,14 +25,45 @@ public class WebPage {
 	
 	/**
 	 * Jsoup gets html
+	 * @return 
 	 */
-	private void loadDocumentFromWeb() {
-		try {
-			document = Jsoup.connect(anchor.anchor.getAnchorUrl()).get();
-		} 
-		catch (IOException e) {
-			Logger.getLogger(WebCrawler.class.getName()).log(Level.SEVERE, null, e);
-		}
+	public void WebPage11 (Anchor anchor)
+	{
+		this.anchor = anchor;
 	}
-
+	
+	// Getters
+	public Document getDocument()
+	{
+		return this.document;
+	}
+	
+	public int getEmailParseStatus()
+	{
+		return this.emailParseStatus;
+	}
+	
+	public String getWebPageHash()
+	{
+		return this.webPageHash;
+	}
+	
+	public int getAnchorPageStatus()
+	{
+		return this.anchorParseStatus;
+	}
+	
+	// JSoup carries the html
+	public void loadDocumentFromWeb()
+	{
+		try 
+		{
+			document = Jsoup.connect(anchor.getAnchorUrl()).get();  
+		} catch (IOException e) 
+		{
+			e.printStackTrace();
+		}	
+	}
 }
+
+	
