@@ -1,37 +1,76 @@
-# WebCrawler
 package Webcrawler;
 
 import java.io.IOException;
-
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-//import javax.lang.model.element.Element;
-
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
+import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
 
-
-public class WebCrawler 
-{
-	public static void main(String[] args)
-	{
-		try {
-			Document doc = Jsoup.connect("http://www.twu.ca/").get();
-			Elements anchors = doc.select("a");
-			for (org.jsoup.nodes.Element anchor: anchors){
-				System.out.println(anchor.attr("href"));
-			}
-		} catch (IOException ex) {
-			Logger.getLogger(WebCrawler.class.getName()).log(Level.SEVERE, null, ex);
-		}
-		
-	}
-
-	//private static void log(Level severe, Object object, IOException ex) {
-		// TODO Auto-generated method stub
-		
+public class WebPage {
+	private Anchor anchor;
+	private String webPageHash;
+	private int anchorParseStatus;
+	private int emailParseStatus;
+	
+	
+	private Document document;
+	/**
+	 * General constructor for crawling
+	 */
+	public WebPage(Anchor anchor) {
+		this.anchor = anchor;
 	}
 	
+	/**
+	 * Jsoup gets html
+	 * @return 
+	 */
+	public void WebPage11 (Anchor anchor)
+	{
+		this.anchor = anchor;
+	}
+	
+	// Getters
+	public Document getDocument()
+	{
+		return this.document;
+	}
+	
+	public int getEmailParseStatus()
+	{
+		return this.emailParseStatus;
+	}
+	
+	public String getWebPageHash()
+	{
+		return this.webPageHash;
+	}
+	
+	public int getAnchorPageStatus()
+	{
+		return this.anchorParseStatus;
+	}
+	
+	// JSoup carries the html
+	public void loadDocumentFromWeb()
+	{
+		try 
+		{
+			Document doc = Jsoup.connect(anchor.getAnchorUrl()).get(); 
+			Elements links = doc.select("a"); // Selects a tag HTML
+			System.out.println("Número de links: " + links.size() + "\n");
+			for(Element e: links) // Imports  org.jsoup.nodes.Element
+			{
+					System.out.println(e.attr("abs:href")); 
+			}
+		} catch (IOException e) 
+		{
+			e.printStackTrace();
+		}	
+	}
+}
 
+	
