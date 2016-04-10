@@ -1,76 +1,45 @@
 package Webcrawler;
 
+
+import java.io.BufferedWriter;
+import java.io.File;
+
+import java.io.FileWriter;
 import java.io.IOException;
+
+
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
+
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
-import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
 
-public class WebPage {
-	private Anchor anchor;
-	private String webPageHash;
-	private int anchorParseStatus;
-	private int emailParseStatus;
-	
-	
-	private Document document;
-	/**
-	 * General constructor for crawling
-	 */
-	public WebPage(Anchor anchor) {
-		this.anchor = anchor;
-	}
-	
-	/**
-	 * Jsoup gets html
-	 * @return 
-	 */
-	public void WebPage11 (Anchor anchor)
+public class WebCrawler 
+{
+	public static void main(String[] args)
 	{
-		this.anchor = anchor;
-	}
-	
-	// Getters
-	public Document getDocument()
-	{
-		return this.document;
-	}
-	
-	public int getEmailParseStatus()
-	{
-		return this.emailParseStatus;
-	}
-	
-	public String getWebPageHash()
-	{
-		return this.webPageHash;
-	}
-	
-	public int getAnchorPageStatus()
-	{
-		return this.anchorParseStatus;
-	}
-	
-	// JSoup carries the html
-	public void loadDocumentFromWeb()
-	{
-		try 
-		{
-			Document doc = Jsoup.connect(anchor.getAnchorUrl()).get(); 
-			Elements links = doc.select("a"); // Selects a tag HTML
-			System.out.println("Número de links: " + links.size() + "\n");
-			for(Element e: links) // Imports  org.jsoup.nodes.Element
-			{
-					System.out.println(e.attr("abs:href")); 
+		
+		try {
+			
+			
+			
+			Document doc = Jsoup.connect("https://www.oracle.com/java/index.html").get();
+			Elements anchors = doc.select("a");
+			for (org.jsoup.nodes.Element anchor: anchors){
+				File file = new File("filename.txt");
+				FileWriter fw = new FileWriter(file.getAbsoluteFile());
+				BufferedWriter bw = new BufferedWriter(fw);
+				bw.write(anchor.attr("href"));
+				bw.close();// to close BufferedWriter
+				System.out.println(anchor.attr("href"));	
 			}
-		} catch (IOException e) 
-		{
-			e.printStackTrace();
-		}	
+		} catch (IOException e){
+			Logger.getLogger(WebCrawler.class.getName()).log(Level.SEVERE, null, e);
+		}
+		
+		
 	}
-}
-
-	
+	 
+		}
