@@ -1,0 +1,29 @@
+import java.io.IOException;
+import java.net.HttpURLConnection;
+//import java.net.MalformedURLException;
+import java.net.URL;
+
+public class LinkChecker {
+	public static void main(String[] args) throws IOException{
+
+	//public LinkChecker() throws IOException {
+		String urlString = "http://www.nbc.com/Heroes/novels/downloads/Heroes_novel_001.pdf";
+		URL url = new URL(urlString);
+		final URL url1 = new URL("http://www.example.com");
+		HttpURLConnection huc = (HttpURLConnection) url1.openConnection();
+		int response= huc.getResponseCode();
+		if(response != 404){ 
+		 System.out.println("exists");
+		} else {
+		    System.out.println("does not exists");
+		}
+		urlString = "http://www.nbc.com/Heroes/novels/downloads/Heroes_novel_190.pdf";
+		url = new URL(urlString);
+		if(response != 404) {
+		    System.out.println("exists");
+		} else {
+		    System.out.println("does not exists");
+		}
+	}
+
+}
